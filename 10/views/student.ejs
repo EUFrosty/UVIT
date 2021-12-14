@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Studentska stranica</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <p>Uspesno ste se prijavili</p>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>Username:</td>
+                    <td><%= username %></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><%= password %></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <% if (grades.length===0){ %>
+            <p>Student nije polagao ispite!</p>
+        <% } else { %>
+
+            Ocene:
+            <ul>
+                <% for (const grade of grades) {%>
+                <li><%= grade %></li>             
+                <% } %>
+            </ul>
+        <% } %>
+
+
+        <h1>Podaci o studentu</h1>
+            <p>Nije pronadjen student za dati username</p>
+            <p>Dobrodosli, <%= student.name %>!</p>
+            <p>Smer: <%= student.major %> </p>
+
+        <h3>Izmenite podatke</h3>
+        <form method="POST" action="/student/update">
+            <input type='hidden' value="<%= student.username %>" name="username">
+            <div>
+                <label>Lozinka</label>
+                <input type='password' name='password' value="<%= student.password %>">
+            </div>
+            <div>
+                <lavel>Ime</lavel>
+                <input type='text' name='name' value="<%= student.name %>">
+            </div>
+            <div>
+                <label>Smer</label>
+                <select name="major" id="major">
+                    <option value='Computer Science'>CS</option>
+                    <option value='P&S'>P&S</option>
+                    <option value='Prof. of M.'>Prof. of M.</option>
+                </select>
+            </div>
+            <button type="submit">Izmeni podatke</button>
+        </form>
+        <script>
+            const major='<%= student.major %>';
+            console.log(major);
+
+            const majorSelect=document.getElementById('major');
+            if (majorSelect){
+                let index=0;
+                let brojac=0;
+                for(const option of majorSelect.options){
+                    if(option.value===major){
+                        index=brojac;
+                    }
+                    ++brojac;
+                }
+
+                majorSelect.options.selectedIndex=index;
+            }
+        </script>
+    </body>
+</html>
