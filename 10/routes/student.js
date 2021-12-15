@@ -15,5 +15,7 @@ const router=express.Router();
 
 router.post("/student", studentController.getStudentByUsername);
 router.post("/student/update", studentController.updateStudentInfo);
+//POST http://localhost:3000/student/delete/mi10050
+router.post("/student/delete/:username/", studentController.deleteStudentByUsername);
 
 module.exports = router;

@@ -59,6 +59,17 @@
             </div>
             <button type="submit">Izmeni podatke</button>
         </form>
+
+        <h3>Obrisite podatke</h3>
+        <form method="POST" action="/student/delete/<%= student.username %>">
+            <div>
+                <label>Potvrdite lozinku:</label>
+                <input type="password" name="password">
+            </div>
+            <button type="submit">Obrisi podatke</button>
+        </form>
+        
+
         <script>
             const major='<%= student.major %>';
             console.log(major);

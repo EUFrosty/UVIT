@@ -39,7 +39,7 @@ function updateStudentInfo(req, res, next){
     const major = req.body.major;
 
     const student = studentModel.getStudentByUsername(username);
-    if(student == null){
+    if(student === null){
         res.render('error.ejs', {
             message: "Nije pronadjen student za dati username."
         });
@@ -61,8 +61,25 @@ function updateStudentInfo(req, res, next){
     });
 }
 
+function deleteStudentByUsername(req, res, next){
+    const username=req.params.username;
+    const password=req.body.password;
+
+    const student = studentModel.getStudentByUsername(username);
+    if (student.password!== password){
+        res.render('error.js', {message: "Brisanje nije uspesno. Lozinka je pogresna!"});
+        return;
+    }
+    studentModel.deleteStudent(username);
+
+    res.redirect("/index.html");
+
+}   
+
+
 module.exports = {
     getStudentByUsername,
-    updateStudentInfo
+    updateStudentInfo,
+    deleteStudentByUsername
 
 };

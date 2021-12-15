@@ -23,14 +23,25 @@ function updateStudentInfo(student){
         if(stud.username = student.username){
             stud.name=student.name;
             stud.password = student.password;
-            stud.password = student.password;
             stud.major = student.major;
         }
     }
 }
 
+function deleteStudent(username){
+    let i=-1;
+    for(const index in studenti){
+        const student=studenti[index];
+        if(student.username===username){
+            i=index;
+        }
+    }
+    studenti.splice(i, 1);
+}
+
 module.exports = {
     getStudentByUsername,
     doPasswordsMatch,
-    updateStudentInfo
+    updateStudentInfo,
+    deleteStudent
 };
